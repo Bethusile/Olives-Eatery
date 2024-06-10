@@ -1,24 +1,24 @@
 const navSlide = () => {
-  const burger = document.querySelector('.burger');
-  const nav = document.querySelector('.links');
-  const navLinks = document.querySelectorAll('.links li');
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.links');
+    const navLinks = document.querySelectorAll('.links li');
 
-  burger.addEventListener('click', () => {
-      //Toggle menu nav
-      nav.classList.toggle('nav-active');
-      //burger animation
-      burger.classList.toggle('toggle');
+    burger.addEventListener('click', () => {
+        //Toggle menu nav
+        nav.classList.toggle('nav-active');
+        //burger animation
+        burger.classList.toggle('toggle');
 
-      //Animate links
-      navLinks.forEach((link, index) => {
-          if (link.style.animation){
-              link.style.animation = '';
-          }
-          else {
-              link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
-          }        
-      });
-  });   
+        //Animate links
+        navLinks.forEach((link, index) => {
+            if (link.style.animation){
+                link.style.animation = '';
+            }
+            else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
+            }        
+        });
+    });   
 }
 
 //Toggle menu nav
@@ -27,10 +27,10 @@ navSlide();
 //Slide show of gallery
 
 const images = [
-    'images/front1.jpg',
+    'images/birthdays.jpg',
     'images/baby shower1.jpg',
     'images/baby shower chair.jpg',
-    'images/birthdays.jpg',
+    'images/front1.jpg',
     'images/kids bday.jpg',
     'images/wine1.jpg',
     'images/wine tasting.jpg',
@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const eventType = document.getElementById("eventType");
     const bookingForm = document.getElementById("bookingForm");
     const acknowledgmentMessage = document.getElementById("acknowledgmentMessage");
+    const alertHeading = acknowledgmentMessage.querySelector('h4');
+    const alertMessage = acknowledgmentMessage.querySelector('p');
 
     bookingType.addEventListener("change", function() {
         if (this.value === "event") {
@@ -82,38 +84,41 @@ document.addEventListener("DOMContentLoaded", function() {
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone").value;
-        const seats = document.getElementById("seats").value;
-        const date = document.getElementById("date").value;
+        const seats = parseInt(document.getElementById("seats").value);
+        const date = new Date(document.getElementById("date").value);
         const time = document.getElementById("time").value;
         const bookingType = document.getElementById("bookingType").value;
         const eventType = document.getElementById("eventType").value;
 
-        const bookingDetails = {
-            name: name,
-            email: email,
-            phone: phone,
-            seats: seats,
-            date: date,
-            time: time,
-            bookingType: bookingType,
-            eventType: eventType
-        };
+        const currentDate = new Date();
+        const todayCutOffTime = new Date();
+        todayCutOffTime.setHours(12, 0, 0, 0);
+
+        let reservationMessage = "";
+
+        // Check if the date is historic or after today's cutoff
+        if (date < currentDate || (date.getTime() === currentDate.getTime() && currentDate > todayCutOffTime)) {
+            reservationMessage = "Please select a valid date and time.";
+            acknowledgmentMessage.classList.remove('alert-success');
+            acknowledgmentMessage.classList.add('alert-danger');
+        } else {
+            // Check if the number of seats exceeds the maximum limit
+            if (seats > 40) {
+                reservationMessage = "Booking failed. Maximum seats exceeded.";
+                acknowledgmentMessage.classList.remove('alert-success');
+                acknowledgmentMessage.classList.add('alert-danger');
+            } else {
+                reservationMessage = "Reservation successful!";
+                acknowledgmentMessage.classList.remove('alert-danger');
+                acknowledgmentMessage.classList.add('alert-success');
+                // Hide form after successful submission
+                bookingForm.style.display = "none";
+            }
+        }
 
         // Display acknowledgment message
         acknowledgmentMessage.style.display = "block";
-        acknowledgmentMessage.innerHTML = `
-            <p>Thank you for your booking, ${bookingDetails.name}!</p>
-            <p>Booking Type: ${bookingDetails.bookingType}</p>
-            <p>Number of Seats: ${bookingDetails.seats}</p>
-            <p>Date: ${bookingDetails.date}</p>
-            <p>Time: ${bookingDetails.time}</p>
-        `;
-        if (bookingDetails.bookingType === "event") {
-            acknowledgmentMessage.innerHTML += `<p>Event Type: ${bookingDetails.eventType}</p>`;
-        }
-        acknowledgmentMessage.innerHTML += `<p>We have sent a confirmation to your email: ${bookingDetails.email}</p>`;
-        
-        // Hide form after submission
-        bookingForm.style.display = "none";
+        alertHeading.textContent = reservationMessage.includes("successful") ? "Success!" : "Error!";
+        alertMessage.textContent = reservationMessage;
     });
 });

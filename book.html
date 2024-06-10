@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Reservations</title>
 </head>
@@ -12,16 +13,16 @@
             <nav>
                 <div class="logo">
                     <a href="home.html">
-                        <img src="/images/green olive.jpg" alt="Olives Eatery">
-                        <h1>Olives Eatery</h1>
+                        <img src="/images/green olive.jpg" alt="Olives Eatery">                        
                     </a>
+                    <h1>Olives Eatery</h1>
                 </div>
                 <ul class="links">
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li><a href="events.html">Events</a></li>                 
-                        <li><a href="book.html">Reservations</a></li>
-                        <li><a href="contactus.html">Contact Us</a></li>      
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="book.html">Reservations</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
                 </ul>
                 <div class="burger">
                     <div class="line1"></div>
@@ -30,9 +31,8 @@
                 </div>
             </nav>
         </header>
-        
-        <main class="background-container">
-            <img class="coverimage" src="/images/baby shower.jpg" alt="olives">
+
+        <div class="background-container">
             <div class="container">
                 <h1>Restaurant Booking</h1>
                 <form id="bookingForm">
@@ -46,7 +46,7 @@
                         <option value="table">Table Reservation</option>
                         <option value="event">Event Booking</option>
                     </select>
-    
+
                     <input type="number" placeholder="Number of Seats" id="seats" title="Enter the number of seats (up to 20)" min="1" max="20" required>
                     <input type="date" id="date" title="Select the date" required>
                     <input type="time" id="time" title="Select the time" required>
@@ -55,28 +55,23 @@
                     
                     <button type="submit" id="submit">Submit</button>
                 </form>
-                <div id="acknowledgmentMessage" style="display:flex; color: white; margin-top: 20px;"></div>
-            </div>
-        </main>
-    <footer>
-        <div class="footer-content">
-            <ul class="footerlinks"> 
-                <li><a href="home.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="events.html">Events</a></li>                 
-                    <li><a href="book.html">Book Now</a></li>
-                    <li><a href="contactus.html">Contact Us</a></li> 
-                    <li><a href="contactus.html">FAQ's</a></li> 
-                    <li><a href="declaration.html">Declaration</a></li>  
-                
-            </ul>
-            <p id="credit">Created by Bethusile 2024</p>
-        </div>
-    </footer>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="app.js"></script>
+                <div class="alert alert-success" role="alert" id="acknowledgmentMessage" style="display:none;">
+                    <h4 class="alert-heading"></h4>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p id="credit">Created by Bethusile 2024</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
 </body>
 </html>
